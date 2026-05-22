@@ -8,45 +8,8 @@ import { Emprestimo, Livro } from '../models/models';
   selector: 'app-loans',
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
-  template: `
-    <section class="page">
-      <h2>Empréstimos</h2>
-      <form [formGroup]="form" (ngSubmit)="emprestar()" class="form-grid">
-        <select formControlName="livroId">
-          <option [ngValue]="null">Livro disponível</option>
-          <option *ngFor="let l of livrosDisponiveis" [ngValue]="l.id">{{ l.titulo }} — {{ l.autor }}</option>
-        </select>
-        <input formControlName="nomePessoa" placeholder="Nome da pessoa">
-        <input formControlName="telefone" placeholder="Telefone">
-        <input formControlName="dataDevolucaoPrevista" type="date">
-        <button type="submit" [disabled]="form.invalid">Emprestar</button>
-      </form>
-      <p class="erro" *ngIf="erro">{{ erro }}</p>
-
-      <h3>Empréstimos ativos</h3>
-      <table>
-        <thead><tr><th>Livro</th><th>Pessoa</th><th>Previsto</th><th>Atraso</th><th>Ações</th></tr></thead>
-        <tbody>
-          <tr *ngFor="let e of ativos">
-            <td>{{ e.livroTitulo }}</td><td>{{ e.nomePessoa }}</td><td>{{ e.dataDevolucaoPrevista }}</td>
-            <td>{{ e.atrasado ? e.diasAtraso + ' dia(s)' : '-' }}</td>
-            <td><button (click)="devolver(e.id)">Devolver</button></td>
-          </tr>
-        </tbody>
-      </table>
-
-      <h3>Relatório de atrasados</h3>
-      <table>
-        <thead><tr><th>Livro</th><th>Pessoa</th><th>Data prevista</th><th>Dias de atraso</th></tr></thead>
-        <tbody>
-          <tr *ngFor="let e of atrasados">
-            <td>{{ e.livroTitulo }}</td><td>{{ e.nomePessoa }}</td><td>{{ e.dataDevolucaoPrevista }}</td><td>{{ e.diasAtraso }}</td>
-          </tr>
-          <tr *ngIf="!atrasados.length"><td colspan="4">Nenhum empréstimo atrasado.</td></tr>
-        </tbody>
-      </table>
-    </section>
-  `
+  templateUrl: './loans.component.html',
+  styleUrls: ['./loans.component.css']
 })
 export class LoansComponent implements OnInit {
   livrosDisponiveis: Livro[] = [];
