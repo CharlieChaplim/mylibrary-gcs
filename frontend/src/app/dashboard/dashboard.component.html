@@ -1,0 +1,26 @@
+<section class="page">
+  <h2>Dashboard</h2>
+  @if (dashboard) {
+    <div class="grid">
+      <article class="card"><strong>{{ dashboard.totalLivros }}</strong><span>Total de livros</span></article>
+      <article class="card"><strong>{{ dashboard.totalDisponiveis }}</strong><span>Disponíveis</span></article>
+      <article class="card"><strong>{{ dashboard.totalEmprestados }}</strong><span>Emprestados</span></article>
+      <article class="card"><strong>{{ dashboard.totalEmprestimosAtivos }}</strong><span>Empréstimos ativos</span></article>
+    </div>
+  }
+
+  <h3>5 últimos empréstimos</h3>
+  <table>
+    <thead><tr><th>Livro</th><th>Pessoa</th><th>Emprestado em</th><th>Previsto</th></tr></thead>
+    <tbody>
+      @for (e of dashboard?.ultimosEmprestimos ?? []; track e.id) {
+        <tr>
+          <td>{{ e.livroTitulo }}</td><td>{{ e.nomePessoa }}</td><td>{{ e.dataEmprestimo }}</td><td>{{ e.dataDevolucaoPrevista }}</td>
+        </tr>
+      }
+      @if (!dashboard?.ultimosEmprestimos?.length) {
+        <tr><td colspan="4">Nenhum empréstimo registrado.</td></tr>
+      }
+    </tbody>
+  </table>
+</section>

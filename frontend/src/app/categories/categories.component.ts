@@ -8,27 +8,8 @@ import { Categoria } from '../models/models';
   selector: 'app-categories',
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
-  template: `
-    <section class="page">
-      <h2>Categorias</h2>
-      <form [formGroup]="form" (ngSubmit)="salvar()" class="form-row">
-        <input formControlName="nome" placeholder="Nome da categoria">
-        <input formControlName="descricao" placeholder="Descrição">
-        <button type="submit" [disabled]="form.invalid">Adicionar</button>
-      </form>
-      <p class="erro" *ngIf="erro">{{ erro }}</p>
-
-      <table>
-        <thead><tr><th>Nome</th><th>Descrição</th><th>Livros</th><th>Ações</th></tr></thead>
-        <tbody>
-          <tr *ngFor="let c of categorias">
-            <td>{{ c.nome }}</td><td>{{ c.descricao }}</td><td>{{ c.totalLivros }}</td>
-            <td><button class="danger" (click)="excluir(c.id)">Excluir</button></td>
-          </tr>
-        </tbody>
-      </table>
-    </section>
-  `
+  templateUrl: './categories.component.html',
+  styleUrls: ['./categories.component.css']
 })
 export class CategoriesComponent implements OnInit {
   categorias: Categoria[] = [];
